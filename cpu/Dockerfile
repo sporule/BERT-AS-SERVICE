@@ -1,0 +1,15 @@
+FROM tensorflow/tensorflow:1.12.0-py3
+RUN pip install bert-serving-server[http]
+RUN mkdir -p /app
+COPY entrypoint.sh prepare_models.sh /app/
+
+RUN apt update && apt install -y wget unzip&& \
+    mkdir /app/models && \
+    bash /app/prepare_models.sh && \
+    apt remove -y unzip wget && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+ENTRYPOINT ["/app/entrypoint.sh"]
+
+HEALTHCHECK --timeout=5s CMD curl -f http://localhost:8125/status/server || exit 1

@@ -1,0 +1,19 @@
+version: "2.4"
+
+services:
+  bert-api:
+    image: sporule/bert-as-service:cpu
+    container_name: bert-api
+    restart: always 
+    ports:
+      - 5555:5555
+      - 5556:5556
+      - 8125:8125
+    env_file:
+      - ./bert.env
+    networks:
+      - bert-api
+
+networks:
+  bert-network:
+    name: bert-network
