@@ -11,6 +11,7 @@ RUN apt update && apt install -y wget unzip&& \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
+RUN ["chmod", "+x", "/app/entrypoint.sh"]
 ENTRYPOINT ["/app/entrypoint.sh"]
 
 HEALTHCHECK --timeout=5s CMD curl -f http://localhost:8125/status/server || exit 1
