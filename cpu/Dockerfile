@@ -2,7 +2,6 @@ FROM tensorflow/tensorflow:1.12.0-py3
 RUN pip install bert-serving-server[http]
 RUN mkdir -p /app
 COPY entrypoint.sh prepare_models.sh /app/
-RUN ["chmod", "+x", "/node/execure.sh"]
 
 RUN apt update && apt install -y wget unzip&& \
     mkdir /app/models && \
@@ -11,6 +10,7 @@ RUN apt update && apt install -y wget unzip&& \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
+RUN ["chmod", "+x", "/app/entrypoint.sh"]
 ENTRYPOINT ["/app/entrypoint.sh"]
 
 HEALTHCHECK --timeout=5s CMD curl -f http://localhost:8125/status/server || exit 1
