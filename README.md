@@ -60,4 +60,4 @@ The service reads model from
 /app/models/$MODEL #$MODEL is the environment variable
 ```
 
-You can mount a volume that contains your models to the path, so it can use your custom BERT models.
+You can mount a volume that contains your models to the path, so it can use your custom BERT models..
