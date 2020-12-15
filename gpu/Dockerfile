@@ -2,7 +2,6 @@ FROM tensorflow/tensorflow:1.12.0-gpu-py3
 RUN pip install bert-serving-server[http]
 RUN mkdir -p /app
 COPY entrypoint.sh prepare_models.sh /app/
-RUN ["chmod", "+x", "/node/execure.sh"]
 
 RUN apt update && apt install -y wget unzip&& \
     mkdir /app/models && \
